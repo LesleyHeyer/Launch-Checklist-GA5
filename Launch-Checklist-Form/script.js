@@ -53,10 +53,15 @@ window.addEventListener("load", function(){
          let fuelLevelIsGood = true;
          let cargoMassIsGood = true;
 
-         if (pilotName.value === "" || copilotName.value === "" || fuelLevel.value === "" || cargoMass.value === "") {
+         if (pilotName.value === "" ||
+             copilotName.value === "" ||
+             fuelLevel.value === "" ||
+             cargoMass.value === "") {
+
             alert("All fields required!");
             showAlerts = false;
             showFaultyItems = false;
+            
          }
 
          if (isNaN(Number(pilotName.value))) {
@@ -83,13 +88,14 @@ window.addEventListener("load", function(){
 
          if (Number(fuelLevel.value) + 1) {
             if (Number(fuelLevel.value) > 10000) {
-               fuelLevel.innerHTML = 'Fuel level high enough for launch';
+               fuelStatus.innerHTML = 'Fuel level high enough for launch';
             } else {
                fuelLevelIsGood = false;
-               fuelLevel.innerHTML = 'Fuel level too low for launch';
+               fuelStatus.innerHTML = 'Fuel level too low for launch';
             }
          } else {
             showFaultyItems = false;
+            fuelStatus.innerHTML = `${typeof fuelLevel.value}`
             if (showAlerts) {
                alert("Invalid Input. Fuel Level must be a number.");
             }
@@ -97,10 +103,10 @@ window.addEventListener("load", function(){
 
          if (Number(cargoMass.value) + 1) {
             if (Number(cargoMass.value) < 10000) {
-               cargoMass.innerHTML = 'Cargo Mass low enough for launch';
+               cargoStatus.innerHTML = 'Cargo Mass low enough for launch';
             } else {
                cargoMassIsGood = false;
-               cargoMass.innerHTML = 'Cargo Mass too high for launch';
+               cargoStatus.innerHTML = 'Cargo Mass too high for launch';
             }
          } else {
             showFaultyItems = false;
@@ -108,7 +114,6 @@ window.addEventListener("load", function(){
                alert("Invalid Input. Cargo Mass must be a number.");
             }
          }
-
 
       if (showFaultyItems) {
          faultyItems.style.visibility = "visible";
